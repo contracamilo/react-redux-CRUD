@@ -13,7 +13,7 @@ class App extends Component {
       <div>
         <Books store={store}/>
         <div className="stream-container">
-           <Streams  store={store}/>
+           <Streams  streamStore={streamStore}/>
         </div>
       </div>
     )
@@ -21,6 +21,7 @@ class App extends Component {
 }
 
 let store = createStore(BooksApp)
+let streamStore = createStore(TwitchApp)
 //console.log(store.getState())
 
 ReactDOM.render(

@@ -7,6 +7,7 @@ import axios from 'axios';
 import FetchRequest from '../../actions/FetchRequest';
 import FetchSuccess from '../../actions/FetchSuccess';
 import FetchFailure from '../../actions/FetchFailure';
+import StreamCard from '../layouts/StreamCard';
 
 
 class Streams extends Component {
@@ -14,20 +15,27 @@ class Streams extends Component {
 
     apiRequest () {
         axios.get('https://api.twitch.tv/kraken/streams/featured?client_id=32xyyrvm28knyd8kfpm2xinzk62g4k')
-          .then(response => {
-            console.log(response);
-          })
-          .catch(e => {
-            console.log(error);
+        .then(response => {
+          const streams = response.data.featured.map(function(feat) {
+            return feat.stream;
           });
+          this.dispatchFetchSuccess(streams);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+
+    dispatchFetchSuccess (streams) {
+      this.props.streamStore.dispatch(FetchSuccess(streams));
     }
 
     dispatchFetchRequest () {
-        this.props.store.dispatch(FetchRequest());
+        this.props.streamStore.dispatch(FetchRequest());
     }
 
     componentWillMount () {
-        this.props.store.subscribe(this.forceUpdate.bind(this));
+        this.props.streamStore.subscribe(this.forceUpdate.bind(this));
         this.apiRequest();
         this.dispatchFetchRequest();
       }
@@ -36,17 +44,35 @@ class Streams extends Component {
  
     
   render() {
-    const stateProps = this.props.store.getState();
+    const stateProps = this.props.streamStore.getState();
     const status = stateProps.status;
+    
+    const streamCardItems = stateProps.streams.map((stream) =>
+      <StreamCard
+        key = { stream._id }
+        streamCover = { stream.preview.medium }
+        streamLink = { stream.channel.url }
+      />
+    );
+    
     return (
-        <div>
-            {status === "loading" ? (
-                <Loader />
-                ) : (
-                <div>Holi</div>
-                )
-            }
-        </div>
+      <div id="Streams">
+      <h2>Twich API</h2>
+      {status === "loading" ? (
+         <Loader />
+       ) : (
+          status === "success" ? (
+            
+            <div className="stream-cards-container">
+           
+            {streamCardItems}
+            </div>
+          ) : (
+            <div></div>
+          )
+        )
+      }
+      </div>
     )
   }
 }

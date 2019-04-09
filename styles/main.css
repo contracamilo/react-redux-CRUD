@@ -25,17 +25,7 @@ h1,h2,h3,h4,h5,h6,p {
     cursor: pointer;
   }
 
-  .stream-container{
-    display: flex;
-    flex-direction: "row";
-    flex-wrap: wrap;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
+
   .box{
     position: relative;
     height: 400px;
@@ -87,6 +77,36 @@ h1,h2,h3,h4,h5,h6,p {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     z-index: 2;
   }
+
+  .stream-cards-container{
+    display: flex;
+    flex-direction: "row";
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
+   
+
+  }
+
+  .stream-container{
+      background-color: #6AC0D6;
+      padding: 0;
+      
+  }
+
+
+  #Streams{
+      text-align: center;
+      color: white;
+      padding-top: 50px;
+  }
+  .stream-cards{
+    width: 30%;
+    margin-bottom: 15px;
+  }
+  
   
   .shine{
     position: absolute;
