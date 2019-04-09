@@ -4,12 +4,17 @@ import { createStore } from 'redux'
 import BooksApp from './reducers/BooksApp'
 import Books from './components/containers/Books'
 import { Provider } from 'react-redux'
+import TwitchApp from './reducers/TwitchApp';
+import Streams from './components/containers/Streams'
 
 class App extends Component {
   render() {
     return (
       <div>
         <Books store={store}/>
+        <div className="stream-container">
+           <Streams  store={store}/>
+        </div>
       </div>
     )
   }

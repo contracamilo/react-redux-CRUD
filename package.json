@@ -14,6 +14,7 @@
   "author": "Camilo Rivera",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",
