@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import BooksApp from './reducers/BooksApp'
 import Books from './components/containers/Books'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import TwitchApp from './reducers/TwitchApp';
 import Streams from './components/containers/Streams'
