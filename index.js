@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import BooksApp from './reducers/BooksApp'
 import Books from './components/containers/Books'
-import { createStore } from 'redux'
+import {  applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import TwitchApp from './reducers/TwitchApp';
 import Streams from './components/containers/Streams'
-
-
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 class App extends Component {
   render() {
@@ -23,9 +23,11 @@ class App extends Component {
 }
 
 let store = createStore(BooksApp)
-let streamStore = createStore(TwitchApp)
-//console.log(store.getState())
 
+let streamStore  = createStore(
+  TwitchApp,
+  applyMiddleware(thunk, logger)
+);
 
 
 
